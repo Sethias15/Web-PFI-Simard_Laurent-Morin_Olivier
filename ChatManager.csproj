@@ -124,6 +124,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\CountryFlagController.cs" />
+    <Compile Include="Controllers\FriendshipsController.cs" />
     <Compile Include="Controllers\Gmail.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Models\LoginCredential.cs" />
     <Compile Include="Models\OnLineUsers.cs" />
     <Compile Include="Models\PasswordView.cs" />
+    <Compile Include="Models\Friendships.cs" />
     <Compile Include="Models\Repository.cs" />
     <Compile Include="Models\ResetPasswordCommand.cs" />
     <Compile Include="Models\SelectListUtilities.cs" />
@@ -152,7 +154,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\iso-3166.txt" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -203,12 +204,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Code\Helper.cshtml" />
-    <Content Include="App_Data\Genders.json" />
-    <Content Include="App_Data\Logins.json" />
-    <Content Include="App_Data\ResetPasswordCommands.json" />
-    <Content Include="App_Data\UnverifiedEmails.json" />
-    <Content Include="App_Data\Users.json" />
-    <Content Include="App_Data\UserTypes.json" />
     <None Include="Properties\PublishProfiles\ChatManager2023 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\MDB2023 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\MDB2023 - Web Deploy1.pubxml" />
@@ -263,8 +258,13 @@
     <Content Include="Views\Accounts\UserList.cshtml" />
     <Content Include="Views\Accounts\VerifyDone.cshtml" />
     <Content Include="Views\Accounts\VerifyError.cshtml" />
+    <Content Include="Views\Friendships\Index.cshtml" />
+    <Content Include="Views\Friendships\GetFriendShipsStatus.cshtml" />
+    <Content Include="Views\Friendships\SetFilterNotFriend.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Chat\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

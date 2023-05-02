@@ -1,0 +1,44 @@
+﻿[
+  {
+    "id": 1,
+    "userId": 1,
+    "TargetUserId": 2,
+    "Accepted": true,
+    "Declined": false
+  },
+  {
+    "id": 1,
+    "userId": 1,
+    "TargetUserId": 3,
+    "Accepted": true,
+    "Declined": false
+  },
+  {
+    "id": 1,
+    "userId": 2,
+    "TargetUserId": 1,
+    "Accepted": true,
+    "Declined": false
+  },
+  {
+    "id": 1,
+    "userId": 2,
+    "TargetUserId": 3,
+    "Accepted": true,
+    "Declined": false
+  },
+  {
+    "id": 1,
+    "userId": 3,
+    "TargetUserId": 1,
+    "Accepted": true,
+    "Declined": false
+  },
+  {
+    "id": 1,
+    "userId": 3,
+    "TargetUserId": 2,
+    "Accepted": true,
+    "Declined": false
+  }
+]

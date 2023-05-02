@@ -1,0 +1,17 @@
+﻿@model ChatManager.Models.Friendship
+
+@foreach (var item in ChatManager.Models.DB.Users.ToList())
+{
+    <div class="friendContainer" style="font-size:14px;">
+        <a href="mailto:@item.Email" title="Compte créé le @item.CreationDate">
+            <div class="userItem">
+                <div class="UserSmallAvatar" style="background: url(@item.GetAvatarURL())"></div>
+                <div class="ellipsis">@item.GetFullName(false)</div>
+            </div>
+
+        </a>
+
+        <img src="/Content/UI-icons/OffLine.png" class="small_icon">
+        <span class="command icon fa green fa-plus-circle" url="/Friendships/SendFriendshipRequest/@item.Id" message="Envoyer une demande d'amitié à @item.GetFullName(false)" title="Envoyer une demande d'amitié à @item.GetFullName(false)"></span>
+    </div>
+}
