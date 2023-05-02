@@ -90,9 +90,11 @@ namespace FileKeyReference
             string url;
 
             if (string.IsNullOrEmpty(key))
-                url = "~" + BasePath + DefaultImage;
+                //url = "~" + BasePath + DefaultImage;
+                url = BasePath + DefaultImage;
             else
-                url = "~" + BasePath + (thumbnail ? @"Thumbnails/" : "") + key + "." + imageFormat.ToString();
+                //url = "~" + BasePath + (thumbnail ? @"Thumbnails/" : "") + key + "." + imageFormat.ToString();
+                url = BasePath + (thumbnail ? @"Thumbnails/" : "") + key + "." + imageFormat.ToString();
 
             return url;
         }
