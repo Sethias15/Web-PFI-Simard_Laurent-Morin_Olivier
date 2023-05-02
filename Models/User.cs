@@ -43,7 +43,7 @@ namespace ChatManager.Models
         public string Avatar { get; set; }
 
         [Display(Name = "Mot de passe"), Required(ErrorMessage = "Obligatoire")]
-        [StringLength(50, ErrorMessage = "Le mot de passe doit comporter au moins {2} caractères.", MinimumLength = 6)]
+        [StringLength(50, ErrorMessage = "Le mot de passe doit comporter au moins {2} caractï¿½res.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         public String Password { get; set; }
 
@@ -58,7 +58,7 @@ namespace ChatManager.Models
         [Compare("Password", ErrorMessage = "Le mot de passe et celui de confirmation ne correspondent pas.")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "Date de création")]
+        [Display(Name = "Date de crï¿½ation")]
         [DataType(DataType.Date)]
         public DateTime CreationDate { get; set; }
         #endregion
