@@ -102,5 +102,18 @@
     "Avatar": "768b51bb-bba6-4d8d-afbd-15a24ebd16f8",
     "Password": "password",
     "CreationDate": "2023-04-21T13:48:08"
+  },
+  {
+    "Id": 9,
+    "UserTypeId": 3,
+    "Verified": true,
+    "Blocked": false,
+    "FirstName": "Olivier",
+    "LastName": "Morin",
+    "GenderId": 1,
+    "Email": "olimorin15@gmail.com",
+    "Avatar": "5cb46f9a-5976-475c-8c43-2ec6c5024ed3",
+    "Password": "patate",
+    "CreationDate": "2023-04-27T09:23:32.8704252-04:00"
   }
 ]
