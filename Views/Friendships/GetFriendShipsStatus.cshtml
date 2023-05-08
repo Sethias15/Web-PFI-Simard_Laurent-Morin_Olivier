@@ -10,8 +10,14 @@
             </div>
 
         </a>
-
-        <img src="/Content/UI-icons/OffLine.png" class="small_icon">
+        @if (ViewBag.LoggedUsersId.Contains(item.Id))
+        {
+            <img src="/Content/UI-icons/OnLine.png" class="small_icon">
+        }
+        else
+        {
+            <img src="/Content/UI-icons/OffLine.png" class="small_icon">
+        }
         <span class="command icon fa green fa-plus-circle" url="/Friendships/SendFriendshipRequest/@item.Id" message="Envoyer une demande d'amitié à @item.GetFullName(false)" title="Envoyer une demande d'amitié à @item.GetFullName(false)"></span>
     </div>
 }
