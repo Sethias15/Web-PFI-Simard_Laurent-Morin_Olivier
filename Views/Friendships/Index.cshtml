@@ -15,22 +15,22 @@
 </div>
 
 <div class="friendfilters">
-    <input type="checkbox" id="filter_NotFriend" class="filter" checked />
+    <input type="checkbox" id="filter_NotFriend" class="filter" @((bool)ViewBag.FilterNotFriend ? "checked":"")/>
     <label for="filter_NotFriend" class="fa green fa-plus-circle" title="Afficher/masquer les usagers qui sont pas encore ami avec vous"></label>
 
-    <input type="checkbox" id="filter_Request" class="filter" checked />
+    <input type="checkbox" id="filter_Request" class="filter" @((bool)ViewBag.FilterRequest ? "checked":"") />
     <label for="filter_Request" class="fa green fa-check" title="Afficher/masquer les requêtes d'amitié reçues"></label>
 
-    <input type="checkbox" id="filter_Pending" class="filter" checked />
+    <input type="checkbox" id="filter_Pending" class="filter" @((bool)ViewBag.FilterPending ? "checked":"") />
     <label for="filter_Pending" class=" fa green fa-clock-o" title="Afficher/masquer les requêtes d'amitié envoyées en attente de réponse"></label>
 
-    <input type="checkbox" id="filter_Friend" class="filter" checked />
+    <input type="checkbox" id="filter_Friend" class="filter" @((bool)ViewBag.FilterFriend ? "checked":"") />
     <label for="filter_Friend" class="fa green fa-check-circle" title="Afficher/masquer tous les amis"></label>
 
-    <input type="checkbox" id="filter_Refused" class="filter" checked />
+    <input type="checkbox" id="filter_Refused" class="filter" @((bool)ViewBag.FilterRefused ? "checked":"") />
     <label for="filter_Refused" class="fa red fa-times-circle" title="Afficher/masquer toutes les demandes refusées ou déclinées"></label>
 
-    <input type="checkbox" id="filter_Blocked" class="filter" checked />
+    <input type="checkbox" id="filter_Blocked" class="filter" @((bool)ViewBag.FilterBlocked ? "checked":"") />
     <label for="filter_Blocked" class="fa red fa-ban" title="Afficher/masquer tous les usagers bloqués"></label>
 
 </div>
