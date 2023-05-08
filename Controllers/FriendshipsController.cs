@@ -119,6 +119,7 @@ namespace ChatManager.Controllers
             ViewBag.FilterFriend = FilterFriend;
             ViewBag.FilterRefused = FilterRefused;
             ViewBag.FilterBlocked = FilterBlocked;
+            ViewBag.LoggedUsersId = new List<int>(OnlineUsers.ConnectedUsersId);
             return View();
         }
         public ActionResult Search(string text)
@@ -171,7 +172,7 @@ namespace ChatManager.Controllers
         {
             if (forceRefresh || OnlineUsers.HasChanged())
             {
-                //ViewBag.LoggedUsersId = new List<int>(OnlineUsers.ConnectedUsersId);
+                ViewBag.LoggedUsersId = new List<int>(OnlineUsers.ConnectedUsersId);
                 return PartialView(DB.Users.ToList());
             }
             return null;
