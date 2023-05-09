@@ -10,7 +10,8 @@ namespace ChatManager.Controllers
     public class FriendshipsController : Controller
     {
         //Correct procedures ?
-        private string SearchText {
+        private string SearchText
+        {
             get
             {
                 if (Session["SearchText"] == null)
@@ -24,21 +25,23 @@ namespace ChatManager.Controllers
                 Session["SearchText"] = value;
             }
         }
-        private bool FilterNotFriend { 
-            get 
-            { 
+        private bool FilterNotFriend
+        {
+            get
+            {
                 if (Session["FilterNotFriend"] == null)
                 {
                     Session["FilterNotFriend"] = true;
                 }
                 return (bool)Session["FilterNotFriend"];
-            } 
+            }
             set
             {
                 Session["FilterNotFriend"] = value;
             }
         }
-        private bool FilterRequest {
+        private bool FilterRequest
+        {
             get
             {
                 if (Session["FilterRequest"] == null)
@@ -52,7 +55,8 @@ namespace ChatManager.Controllers
                 Session["FilterRequest"] = value;
             }
         }
-        private bool FilterPending {
+        private bool FilterPending
+        {
             get
             {
                 if (Session["FilterPending"] == null)
@@ -66,7 +70,8 @@ namespace ChatManager.Controllers
                 Session["FilterPending"] = value;
             }
         }
-        private bool FilterFriend {
+        private bool FilterFriend
+        {
             get
             {
                 if (Session["FilterFriend"] == null)
@@ -80,7 +85,8 @@ namespace ChatManager.Controllers
                 Session["FilterFriend"] = value;
             }
         }
-        private bool FilterRefused {
+        private bool FilterRefused
+        {
             get
             {
                 if (Session["FilterRefused"] == null)
@@ -94,7 +100,8 @@ namespace ChatManager.Controllers
                 Session["FilterRefused"] = value;
             }
         }
-        private bool FilterBlocked {
+        private bool FilterBlocked
+        {
             get
             {
                 if (Session["FilterBlocked"] == null)
@@ -167,13 +174,13 @@ namespace ChatManager.Controllers
                     break;
             }
         }*/
-        [OnlineUsers.AdminAccess(false)] // RefreshTimout = false otherwise periodical refresh with lead to never timed out session
+        [OnlineUsers.UserAccess(false)] // RefreshTimout = false otherwise periodical refresh with lead to never timed out session
         public ActionResult GetFriendShipsStatus(bool forceRefresh = false)
         {
             if (forceRefresh || OnlineUsers.HasChanged())
             {
                 ViewBag.LoggedUsersId = new List<int>(OnlineUsers.ConnectedUsersId);
-                return PartialView(DB.Users.ToList());
+                return PartialView();
             }
             return null;
         }
