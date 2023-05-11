@@ -1,4 +1,5 @@
 ﻿using ChatManager.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -164,22 +165,48 @@ namespace ChatManager.Controllers
             FilterBlocked = check;
             return null;
         }
-        /*private List<User> FilterUsers()
+        private List<User> FilterUsers()
         {
-            switch ()
-            {
-                case x:
-                    break;
-                default:
-                    break;
+            List<User> allUsers = new List<User>(DB.Users.ToList());
+            List<User> userToShow = new List<User>();
+            User currentUser = OnlineUsers.GetSessionUser();
+            allUsers.Remove(currentUser);
+
+            if (FilterNotFriend) {
+                List<Friendship> friendshipToIgnore = DB.Friendships.ToList().FindAll(f => f.UserId == currentUser.Id);
+                foreach (User user in allUsers)
+                {
+                if(!friendshipToIgnore.Exists(f => user.Id == f.TargetUserId))
+                    {
+                        userToShow.Add(user);
+                    }
+                }
             }
-        }*/
+
+
+            //switch ()
+            //{
+            //    case x:
+            //        break;
+            //    default:
+            //        break;
+            //}
+
+
+
+
+
+
+            return userToShow;
+
+        }
         [OnlineUsers.UserAccess(false)] // RefreshTimout = false otherwise periodical refresh with lead to never timed out session
         public ActionResult GetFriendShipsStatus(bool forceRefresh = false)
         {
             if (forceRefresh || OnlineUsers.HasChanged())
             {
                 ViewBag.LoggedUsersId = new List<int>(OnlineUsers.ConnectedUsersId);
+                ViewBag.FilteredUser = FilterUsers();
                 return PartialView();
             }
             return null;

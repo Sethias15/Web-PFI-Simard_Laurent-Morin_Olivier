@@ -1,6 +1,6 @@
 ﻿@model ChatManager.Models.Friendship
 
-@foreach (var item in ChatManager.Models.DB.Users.ToList())
+@foreach (var item in ViewBag.FilteredUser)
 {
     <div class="friendContainer" style="font-size:14px;">
         <a href="mailto:@item.Email" title="Compte créé le @item.CreationDate">
