@@ -172,33 +172,44 @@ namespace ChatManager.Controllers
             List<User> userToShow = new List<User>();
             User currentUser = OnlineUsers.GetSessionUser();
             allUsers.Remove(currentUser);
-            List<Friendship> friendshipsWithCurrentUser = DB.Friendships.ToList().FindAll(f => f.UserId == currentUser.Id);
+            List<Friendship> friendshipsWithCurrentUser = DB.Friendships.ToList().FindAll(f => f.UserId == currentUser.Id || f.TargetUserId == currentUser.Id);
             foreach (User user in allUsers)
             {
-                if (FilterNotFriend && !friendshipsWithCurrentUser.Exists(f => user.Id == f.TargetUserId))
+                if (FilterNotFriend && !friendshipsWithCurrentUser.Exists(f => user.Id == f.TargetUserId || f.UserId == user.Id ))
                 {
                     userToShow.Add(user);
                 }
-                else if (FilterRequest && false)
+                else if (FilterRequest && friendshipsWithCurrentUser.Exists(f => (user.Id == f.UserId) && !f.Accepted && !f.Declined))
                 {
                     userToShow.Add(user);
                 }
-                else if (FilterPending && false)
+                else if (FilterPending && friendshipsWithCurrentUser.Exists(f => (user.Id == f.TargetUserId) && !f.Accepted && !f.Declined))
                 {
                     userToShow.Add(user);
                 }
-                else if (FilterFriend && false)
+                else if (FilterFriend && friendshipsWithCurrentUser.Exists(f => (user.Id == f.TargetUserId || f.UserId == user.Id) && f.Accepted))
                 {
                     userToShow.Add(user);
                 }
-                else if (FilterRefused && false)
+                else if (FilterRefused && friendshipsWithCurrentUser.Exists(f => (user.Id == f.TargetUserId || f.UserId == user.Id) && f.Declined))
                 {
                     userToShow.Add(user);
                 }
-                else if (FilterBlocked && false)
+
+                if (user.Blocked)
                 {
+                    //Si l'usager avait deja une relation d'amitier avec l'usager actuelle avant de se faire bloquer
+                    //On la retire pour "changer l'utilisateur de categoie" et donc eviter les doublons
+                    if (userToShow.Contains(user))
+                    {
+                    userToShow.Remove(user);
+                    }
+                    if (FilterBlocked)
+                    {
                     userToShow.Add(user);
+                    }
                 }
+
             }
             return userToShow;
         }
