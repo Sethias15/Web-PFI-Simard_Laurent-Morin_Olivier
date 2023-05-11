@@ -167,43 +167,48 @@ namespace ChatManager.Controllers
         }
         private List<User> FilterUsers()
         {
+            //Utiliser SortedUser pour la recherche texte
             List<User> allUsers = new List<User>(DB.Users.ToList());
             List<User> userToShow = new List<User>();
             User currentUser = OnlineUsers.GetSessionUser();
             allUsers.Remove(currentUser);
-
-            if (FilterNotFriend) {
-                List<Friendship> friendshipToIgnore = DB.Friendships.ToList().FindAll(f => f.UserId == currentUser.Id);
-                foreach (User user in allUsers)
+            List<Friendship> friendshipsWithCurrentUser = DB.Friendships.ToList().FindAll(f => f.UserId == currentUser.Id);
+            foreach (User user in allUsers)
+            {
+                if (FilterNotFriend && !friendshipsWithCurrentUser.Exists(f => user.Id == f.TargetUserId))
                 {
-                if(!friendshipToIgnore.Exists(f => user.Id == f.TargetUserId))
-                    {
-                        userToShow.Add(user);
-                    }
+                    userToShow.Add(user);
+                }
+                else if (FilterRequest && false)
+                {
+                    userToShow.Add(user);
+                }
+                else if (FilterPending && false)
+                {
+                    userToShow.Add(user);
+                }
+                else if (FilterFriend && false)
+                {
+                    userToShow.Add(user);
+                }
+                else if (FilterRefused && false)
+                {
+                    userToShow.Add(user);
+                }
+                else if (FilterBlocked && false)
+                {
+                    userToShow.Add(user);
                 }
             }
-
-
-            //switch ()
-            //{
-            //    case x:
-            //        break;
-            //    default:
-            //        break;
-            //}
-
-
-
-
-
-
             return userToShow;
-
         }
+
+ 
+
         [OnlineUsers.UserAccess(false)] // RefreshTimout = false otherwise periodical refresh with lead to never timed out session
         public ActionResult GetFriendShipsStatus(bool forceRefresh = false)
         {
-            if (forceRefresh || OnlineUsers.HasChanged())
+            if (forceRefresh || OnlineUsers.HasChanged() || DB.Friendships.HasChanged)
             {
                 ViewBag.LoggedUsersId = new List<int>(OnlineUsers.ConnectedUsersId);
                 ViewBag.FilteredUser = FilterUsers();
