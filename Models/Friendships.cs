@@ -15,6 +15,20 @@ namespace ChatManager.Models
             Accepted = false;
             Declined = false;
         }
+        public Friendship(int userId, int targerUserId)
+        {
+            UserId = userId;
+            TargetUserId = targerUserId;
+            Accepted = false;
+            Declined = false;
+        }
+        public Friendship(int userId, int targerUserId, bool accepted, bool declined)
+        {
+            UserId = userId;
+            TargetUserId = targerUserId;
+            Accepted = accepted;
+            Declined = declined;
+        }
         public User Clone()
         {
             return JsonConvert.DeserializeObject<User>(JsonConvert.SerializeObject(this));

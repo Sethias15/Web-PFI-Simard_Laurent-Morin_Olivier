@@ -1,4 +1,6 @@
-﻿@model ChatManager.Models.Friendship
+@using ChatManager.Models;
+
+@model ChatManager.Models.Friendship;
 <br />
 @foreach (var item in ViewBag.FilteredUser)
 {
@@ -9,14 +11,57 @@
                 <div class="ellipsis">@item.GetFullName(false)</div>
             </div>
         </a>
-        @if (ViewBag.LoggedUsersId.Contains(item.Id))
+        @{
+            Friendship friendship = DB.Friendships.GetByTargetId(item.Id);
+
+        }
+        @if (item.Blocked)
         {
-            <img src="/Content/UI-icons/OnLine.png" class="small_icon">
+            <img src="~/Content/UI-icons/Masked.png" class="small_icon">
+            <span class="icon fa red fa-ban" title="Requête d'amitié avec @item.GetFullName(false) en attente"></span>
         }
         else
         {
-            <img src="/Content/UI-icons/OffLine.png" class="small_icon">
+            if (ViewBag.LoggedUsersId.Contains(item.Id))
+            {
+                <img src="/Content/UI-icons/OnLine.png" class="small_icon">
+            }
+            else
+            {
+                <img src="/Content/UI-icons/OffLine.png" class="small_icon">
+            }
+            if (friendship != null)
+            {
+                if (friendship.Accepted && !friendship.Declined)
+                {
+                    <span class="icon fa green fa-check-circle" title="Vous ête ami avec @item.GetFullName(false)"></span>
+                    <span class="command icon fa red fa-times" url="/Friendships/RemoveFriendship/@friendship.Id" message="Retirer l'amitié avec @item.GetFullName(false)" title="Retirer l'amitié avec @item.GetFullName(false)é"></span>
+                }
+                else if (!friendship.Accepted && !friendship.Declined && item.Id == friendship.UserId)
+                {
+                    <span class="command icon fa green fa-check" url="/Friendships/AcceptFriendshipRequest/@friendship.Id" message="Accepter la demande d'amitié de @item.GetFullName(false)" title="Accepter la demande d'amitié de @item.GetFullName(false)"></span>
+                    <span class="command icon fa red fa-times" url="/Friendships/DeclineFriendshipRequest/@friendship.Id" message="Décliner la demande d'amitié de @item.GetFullName(false)" title="Décliner la demande d'amitié de @item.GetFullName(false)"></span>
+                }
+                else if (!friendship.Accepted && !friendship.Declined && item.Id == friendship.TargetUserId)
+                {
+                    <span class="icon fa green fa-clock-o" title="Requête d'amitié avec @item.GetFullName(false) en attente"></span>
+                    <span class="command icon fa red fa-times" url="/Friendships/RemoveFriendshipRequest/@friendship.Id" message="Retirer la demande d'amitié avec @item.GetFullName(false)" title="Retirer la demande d'amitié avec @item.GetFullName(false)"></span>
+                }
+                else if (!friendship.Accepted && friendship.Declined && item.Id == friendship.UserId)
+                {
+                    <span class="icon fa red fa-times-circle" title="Votre demande d'amitié avec @item.GetFullName(false) a été déclinée"></span>
+                }
+                else if (!friendship.Accepted && friendship.Declined && item.Id == friendship.TargetUserId)
+                {
+                    <span class="icon fa red fa-times-circle" title="Vous avez décliné de la demande d'amitié avec @item.GetFullName(false)"></span>
+                    <span class="command icon fa green fa-plus-circle" url="/Friendships/SendFriendshipRequest/@item.Id" message="Envoyer une demande d'amitié à @item.GetFullName(false)" title="Envoyer une demande d'amitié à @item.GetFullName(false)"></span>
+                }
+            }
+            else
+            {
+                <span class="command icon fa green fa-plus-circle" url="/Friendships/SendFriendshipRequest/@item.Id" message="Envoyer une demande d'amitié à @item.GetFullName(false)" title="Envoyer une demande d'amitié à @item.GetFullName(false)"></span>
+            }
         }
-        <span class="command icon fa green fa-plus-circle" url="/Friendships/SendFriendshipRequest/@item.Id" message="Envoyer une demande d'amitié à @item.GetFullName(false)" title="Envoyer une demande d'amitié à @item.GetFullName(false)"></span>
+
     </div>
 }

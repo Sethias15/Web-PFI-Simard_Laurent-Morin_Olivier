@@ -216,5 +216,40 @@ namespace ChatManager.Controllers
             }
             return null;
         }
+        public ActionResult SendFriendshipRequest(int targetId) //Aucune relation ou demande après refus
+        {
+            int userId = OnlineUsers.GetSessionUser().Id;
+            if (DB.Friendships.GetByTargetId(targetId) == null)
+            {
+                DB.Friendships.Add(new Friendship(userId, targetId));
+            }
+            //ajoute "Accepted": false, "Declined": false
+            return null;
+        }
+        public ActionResult RemoveFriendshipRequest(int friendshipId) //Annuler une demande
+        {
+            /*Session["FilterRequest"]
+            DB.Users.
+            DB.Friendships.Get()
+            DB.Friendships.Delete()*/
+            //retire la relation du fichier
+            return null;
+        }
+        public ActionResult AcceptFriendshipRequest(int friendshipId) //Accepter une demande
+        {
+            //ajoute "Accepted": true, "Declined": false
+            return null;
+        }
+        public ActionResult DeclineFriendshipRequest(int friendshipId) //Refuser une demande
+        {
+            //ajoute "Accepted": false, "Declined": true
+            return null;
+        }
+        public ActionResult RemoveFriendship(int friendshipId) //Retirer une amitié déjà existante
+        {
+            //retire la relation du fichier
+            //différente fonction pour conservation messages ?
+            return null;
+        }
     }
 }

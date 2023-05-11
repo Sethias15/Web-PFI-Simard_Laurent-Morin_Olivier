@@ -27,7 +27,7 @@ namespace ChatManager.Models
         public static Repository<ResetPasswordCommand> ResetPasswordCommands { get; set; }
         public static Repository<Login> Logins { get; set; }
         public static UsersRepository Users { get; set; }
-        public static Repository<Friendship> Friendships { get; set; }
+        public static FriendshipRepository Friendships { get; set; }
         #endregion
         #region initialization
         public DB()
@@ -38,7 +38,7 @@ namespace ChatManager.Models
             ResetPasswordCommands = new Repository<ResetPasswordCommand>();
             Logins = new Repository<Login>();
             Users = new UsersRepository();
-            Friendships = new Repository<Friendship>();
+            Friendships = new FriendshipRepository();
             InitRepositories(this);
         }
         private static void InitRepositories(DB db)

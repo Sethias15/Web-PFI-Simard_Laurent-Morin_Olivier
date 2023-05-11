@@ -1,44 +1,44 @@
 ﻿[
   {
     "id": 1,
-    "userId": 1,
-    "TargetUserId": 2,
-    "Accepted": true,
+    "userId": 9,
+    "TargetUserId": 1,
+    "Accepted": false,
     "Declined": false
   },
   {
     "id": 2,
-    "userId": 1,
-    "TargetUserId": 3,
+    "userId": 9,
+    "TargetUserId": 2,
     "Accepted": true,
     "Declined": false
   },
   {
     "id": 3,
-    "userId": 2,
-    "TargetUserId": 1,
-    "Accepted": true,
-    "Declined": false
+    "userId": 9,
+    "TargetUserId": 3,
+    "Accepted": false,
+    "Declined": true
   },
   {
     "id": 4,
-    "userId": 2,
-    "TargetUserId": 3,
+    "userId": 4,
+    "TargetUserId": 9,
     "Accepted": true,
     "Declined": false
   },
   {
     "id": 5,
-    "userId": 3,
-    "TargetUserId": 1,
-    "Accepted": true,
-    "Declined": false
+    "userId": 5,
+    "TargetUserId": 9,
+    "Accepted": false,
+    "Declined": true
   },
   {
     "id": 6,
-    "userId": 3,
-    "TargetUserId": 2,
-    "Accepted": true,
+    "userId": 6,
+    "TargetUserId": 9,
+    "Accepted": false,
     "Declined": false
   },
   {
