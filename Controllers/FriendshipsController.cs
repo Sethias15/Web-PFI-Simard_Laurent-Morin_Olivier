@@ -167,8 +167,16 @@ namespace ChatManager.Controllers
         }
         private List<User> FilterUsers()
         {
+            List<User> allUsers;
             //Utiliser SortedUser pour la recherche texte
-            List<User> allUsers = new List<User>(DB.Users.ToList());
+            if (SearchText == null) {
+              allUsers = new List<User>(DB.Users.SortedUsers());
+            }
+            else
+            {
+               allUsers = DB.Users.SortedUsers().Where(u => ( u.FirstName.ToLower() + u.LastName.ToLower()).Contains(SearchText.ToLower())).ToList();
+            }
+
             List<User> userToShow = new List<User>();
             User currentUser = OnlineUsers.GetSessionUser();
             allUsers.Remove(currentUser);
