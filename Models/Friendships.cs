@@ -22,8 +22,9 @@ namespace ChatManager.Models
             Accepted = false;
             Declined = false;
         }
-        public Friendship(int userId, int targerUserId, bool accepted, bool declined)
+        public Friendship(int id, int userId, int targerUserId, bool accepted, bool declined)
         {
+            Id = id;
             UserId = userId;
             TargetUserId = targerUserId;
             Accepted = accepted;

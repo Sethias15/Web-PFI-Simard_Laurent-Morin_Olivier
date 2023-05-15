@@ -12,7 +12,6 @@
         </a>
         @{
             Friendship friendship = DB.Friendships.GetByTargetId(item.Id);
-
         }
         @if (item.Blocked)
         {
@@ -46,11 +45,11 @@
                     <span class="icon fa green fa-clock-o" title="Requête d'amitié avec @item.GetFullName(false) en attente"></span>
                     <span class="command icon fa red fa-times" url="/Friendships/RemoveFriendshipRequest/@friendship.Id" message="Retirer la demande d'amitié avec @item.GetFullName(false)" title="Retirer la demande d'amitié avec @item.GetFullName(false)"></span>
                 }
-                else if (!friendship.Accepted && friendship.Declined && item.Id == friendship.UserId)
+                else if (!friendship.Accepted && friendship.Declined && item.Id == friendship.TargetUserId)
                 {
                     <span class="icon fa red fa-times-circle" title="Votre demande d'amitié avec @item.GetFullName(false) a été déclinée"></span>
                 }
-                else if (!friendship.Accepted && friendship.Declined && item.Id == friendship.TargetUserId)
+                else if (!friendship.Accepted && friendship.Declined && item.Id == friendship.UserId)
                 {
                     <span class="icon fa red fa-times-circle" title="Vous avez décliné de la demande d'amitié avec @item.GetFullName(false)"></span>
                     <span class="command icon fa green fa-plus-circle" url="/Friendships/SendFriendshipRequest/@item.Id" message="Envoyer une demande d'amitié à @item.GetFullName(false)" title="Envoyer une demande d'amitié à @item.GetFullName(false)"></span>
