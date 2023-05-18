@@ -216,6 +216,7 @@
     <Content Include="App_Data\UserTypes.json" />
     <None Include="Properties\PublishProfiles\ChatManager2023 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ChatManager20230501161205 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ChatManager20230516133157 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\MDB2023 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\MDB2023 - Web Deploy1.pubxml" />
     <None Include="Properties\PublishProfiles\MoviesRepository - Web Deploy.pubxml" />

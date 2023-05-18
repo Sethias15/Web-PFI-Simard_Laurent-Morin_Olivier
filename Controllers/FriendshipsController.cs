@@ -10,7 +10,6 @@ namespace ChatManager.Controllers
 {
     public class FriendshipsController : Controller
     {
-        //Correct procedures ?
         private string SearchText
         {
             get
@@ -169,12 +168,13 @@ namespace ChatManager.Controllers
         {
             List<User> allUsers;
             //Utiliser SortedUser pour la recherche texte
-            if (SearchText == null) {
-              allUsers = new List<User>(DB.Users.SortedUsers());
+            if (SearchText == null)
+            {
+                allUsers = new List<User>(DB.Users.SortedUsers());
             }
             else
             {
-               allUsers = DB.Users.SortedUsers().Where(u => ( u.FirstName.ToLower() + u.LastName.ToLower()).Contains(SearchText.ToLower())).ToList();
+                allUsers = DB.Users.SortedUsers().Where(u => (u.FirstName.ToLower() + u.LastName.ToLower()).Contains(SearchText.ToLower())).ToList();
             }
 
             List<User> userToShow = new List<User>();
@@ -183,7 +183,7 @@ namespace ChatManager.Controllers
             List<Friendship> friendshipsWithCurrentUser = DB.Friendships.ToList().FindAll(f => f.UserId == currentUser.Id || f.TargetUserId == currentUser.Id);
             foreach (User user in allUsers)
             {
-                if (FilterNotFriend && !friendshipsWithCurrentUser.Exists(f => user.Id == f.TargetUserId || f.UserId == user.Id ))
+                if (FilterNotFriend && !friendshipsWithCurrentUser.Exists(f => user.Id == f.TargetUserId || f.UserId == user.Id))
                 {
                     userToShow.Add(user);
                 }
@@ -210,11 +210,11 @@ namespace ChatManager.Controllers
                     //On la retire pour "changer l'utilisateur de categorie" et donc eviter les doublons
                     if (userToShow.Contains(user))
                     {
-                    userToShow.Remove(user);
+                        userToShow.Remove(user);
                     }
                     if (FilterBlocked)
                     {
-                    userToShow.Add(user);
+                        userToShow.Add(user);
                     }
                 }
 
@@ -222,7 +222,7 @@ namespace ChatManager.Controllers
             return userToShow;
         }
 
- 
+
 
         [OnlineUsers.UserAccess(false)] // RefreshTimout = false otherwise periodical refresh with lead to never timed out session
         public ActionResult GetFriendShipsStatus(bool forceRefresh = false)
@@ -235,37 +235,40 @@ namespace ChatManager.Controllers
             }
             return null;
         }
-        public ActionResult SendFriendshipRequest(int targetId) //Aucune relation ou demande après refus
+        public ActionResult SendFriendshipRequest(int id) //Aucune relation ou demande après refus
         {
             int userId = OnlineUsers.GetSessionUser().Id;
-            if (DB.Friendships.GetByTargetId(targetId) == null)
-            {
-                DB.Friendships.Add(new Friendship(userId, targetId));
-            }
+            Friendship fs = DB.Friendships.GetByTargetId(id);
+            if (fs == null)
+                DB.Friendships.Add(new Friendship(userId, id));
+            else
+                DB.Friendships.Update(new Friendship(fs.Id, fs.TargetUserId, fs.UserId, false, false));
             //ajoute "Accepted": false, "Declined": false
             return null;
         }
-        public ActionResult RemoveFriendshipRequest(int friendshipId) //Annuler une demande
+        public ActionResult RemoveFriendshipRequest(int id) //Annuler une demande
         {
-            /*Session["FilterRequest"]
-            DB.Users.
-            DB.Friendships.Get()
-            DB.Friendships.Delete()*/
+            DB.Friendships.Delete(id);
             //retire la relation du fichier
             return null;
         }
-        public ActionResult AcceptFriendshipRequest(int friendshipId) //Accepter une demande
+        public ActionResult AcceptFriendshipRequest(int id) //Accepter une demande
         {
+            Friendship fs = DB.Friendships.Get(id);
+            DB.Friendships.Update(new Friendship(id, fs.UserId, fs.TargetUserId, true, fs.Declined));
             //ajoute "Accepted": true, "Declined": false
             return null;
         }
-        public ActionResult DeclineFriendshipRequest(int friendshipId) //Refuser une demande
+        public ActionResult DeclineFriendshipRequest(int id) //Refuser une demande
         {
+            Friendship fs = DB.Friendships.Get(id);
+            DB.Friendships.Update(new Friendship(id, fs.UserId, fs.TargetUserId, fs.Accepted, true));
             //ajoute "Accepted": false, "Declined": true
             return null;
         }
-        public ActionResult RemoveFriendship(int friendshipId) //Retirer une amitié déjà existante
+        public ActionResult RemoveFriendship(int id) //Retirer une amitié déjà existante
         {
+            DB.Friendships.Delete(id);
             //retire la relation du fichier
             //différente fonction pour conservation messages ?
             return null;
