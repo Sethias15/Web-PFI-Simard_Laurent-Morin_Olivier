@@ -123,6 +123,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\CountryFlagController.cs" />
     <Compile Include="Controllers\FriendshipsController.cs" />
     <Compile Include="Controllers\Gmail.cs" />
@@ -271,10 +272,10 @@
     <Content Include="Views\Friendships\Index.cshtml" />
     <Content Include="Views\Friendships\GetFriendShipsStatus.cshtml" />
     <Content Include="Views\Friendships\SetFilterNotFriend.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Chat\GetFriendsList.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Chat\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

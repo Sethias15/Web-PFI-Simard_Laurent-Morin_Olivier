@@ -207,7 +207,7 @@ namespace ChatManager.Controllers
                 if (user.Blocked)
                 {
                     //Si l'usager avait deja une relation d'amitier avec l'usager actuelle avant de se faire bloquer
-                    //On la retire pour "changer l'utilisateur de categoie" et donc eviter les doublons
+                    //On la retire pour "changer l'utilisateur de categorie" et donc eviter les doublons
                     if (userToShow.Contains(user))
                     {
                     userToShow.Remove(user);
