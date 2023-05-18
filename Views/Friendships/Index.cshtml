@@ -40,6 +40,7 @@
 
 
 @section Scripts {
+    @Scripts.Render("~/bundles/NotificationsHandler")
     <script defer>
         let friendShipsStatus = new PartialRefresh("/Friendships/GetFriendShipsStatus", "friendshipsListContainer", 5, UpdatefriendShipsCallback);
 
