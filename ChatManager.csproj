@@ -275,6 +275,7 @@
     <Content Include="Views\Friendships\SetFilterNotFriend.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Chat\GetFriendsList.cshtml" />
+    <Content Include="Views\Chat\AdminChat.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

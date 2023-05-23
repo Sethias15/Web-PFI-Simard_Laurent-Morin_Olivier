@@ -9,7 +9,6 @@ namespace ChatManager.Controllers
 {
     public class ChatController : Controller
     {
-
         private List<User> FilterFriends()
         {
             List<User> allUsers = new List<User>(DB.Users.SortedUsers());
@@ -49,6 +48,12 @@ namespace ChatManager.Controllers
                 return PartialView();
             }
             return null;
+        }
+
+        [OnlineUsers.AdminAccess]
+        public ActionResult AdminChat()
+        {
+            return View();
         }
 
     }
