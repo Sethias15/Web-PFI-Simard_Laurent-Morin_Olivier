@@ -80,5 +80,11 @@ namespace ChatManager.Controllers
         {
             return null;
         }
+        [OnlineUsers.AdminAccess]
+        public ActionResult AdminChat()
+        {
+            return View();
+        }
+
     }
 }

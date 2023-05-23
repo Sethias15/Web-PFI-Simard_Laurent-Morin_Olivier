@@ -237,38 +237,49 @@ namespace ChatManager.Controllers
         }
         public ActionResult SendFriendshipRequest(int id) //Aucune relation ou demande après refus
         {
-            int userId = OnlineUsers.GetSessionUser().Id;
+            User user = OnlineUsers.GetSessionUser();
             Friendship fs = DB.Friendships.GetByTargetId(id);
             if (fs == null)
-                DB.Friendships.Add(new Friendship(userId, id));
+                DB.Friendships.Add(new Friendship(user.Id, id));
             else
                 DB.Friendships.Update(new Friendship(fs.Id, fs.TargetUserId, fs.UserId, false, false));
+            OnlineUsers.AddNotification(id, $"Vous avez reçu une demande d'amitié de {user.GetFullName()}");
             //ajoute "Accepted": false, "Declined": false
             return null;
         }
         public ActionResult RemoveFriendshipRequest(int id) //Annuler une demande
         {
+            User user = OnlineUsers.GetSessionUser();
+            Friendship fs = DB.Friendships.Get(id);
             DB.Friendships.Delete(id);
             //retire la relation du fichier
+            OnlineUsers.AddNotification(fs.TargetUserId, $"{user.GetFullName()} a retiré sa demande d'amitié");
             return null;
         }
         public ActionResult AcceptFriendshipRequest(int id) //Accepter une demande
         {
+            User user = OnlineUsers.GetSessionUser();
             Friendship fs = DB.Friendships.Get(id);
             DB.Friendships.Update(new Friendship(id, fs.UserId, fs.TargetUserId, true, fs.Declined));
-            //ajoute "Accepted": true, "Declined": false
+            //change "Accepted": true, "Declined": false
+            OnlineUsers.AddNotification(fs.UserId, $"{user.GetFullName()} a accepté votre demande d'amitié");
             return null;
         }
         public ActionResult DeclineFriendshipRequest(int id) //Refuser une demande
         {
+            User user = OnlineUsers.GetSessionUser();
             Friendship fs = DB.Friendships.Get(id);
             DB.Friendships.Update(new Friendship(id, fs.UserId, fs.TargetUserId, fs.Accepted, true));
-            //ajoute "Accepted": false, "Declined": true
+            //change "Accepted": false, "Declined": true
+            OnlineUsers.AddNotification(fs.UserId, $"{user.GetFullName()} a décliné votre demande d'amitié");
             return null;
         }
         public ActionResult RemoveFriendship(int id) //Retirer une amitié déjà existante
         {
+            User user = OnlineUsers.GetSessionUser();
+            Friendship fs = DB.Friendships.Get(id);
             DB.Friendships.Delete(id);
+            OnlineUsers.AddNotification(user.Id == fs.UserId ? fs.TargetUserId : fs.UserId, $"{user.GetFullName()} s'est désisté de votre amitié");
             //retire la relation du fichier
             //différente fonction pour conservation messages ?
             return null;
