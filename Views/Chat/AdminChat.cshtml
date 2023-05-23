@@ -1,7 +1,27 @@
-﻿
+﻿@using ChatManager.Models;
 @{
     ViewBag.Title = "AdminChat";
 }
 
-<h2>AdminChat</h2>
+<h2>Conversations</h2>
+<hr />
+<div class="main">
+    <div id="messagesListContainer">
 
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/NotificationsHandler")
+    <script defer>
+        let messagesStatus = new PartialRefresh("/Chat/GetAdminMessagesStatus", "messagesListContainer", 5, UpdateMessagesCallback);
+
+        function UpdateMessagesCallback() {
+            $(".command").click(function () {
+                var url = $(this).attr("url");
+                var message = $(this).attr("message");
+                messagesStatus.confirmedCommand(message, url);
+            });
+        }
+    </script>
+}

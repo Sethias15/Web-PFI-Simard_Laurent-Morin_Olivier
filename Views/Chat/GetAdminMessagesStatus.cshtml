@@ -1,0 +1,13 @@
+﻿@using ChatManager.Models;
+<br />
+@foreach (var item in DB.Messages.ToList())
+{
+    <div class="messagesDump" style="margin-bottom:1em;">
+        @Helper.AvatarProfilLink(DB.Users.FindUser(item.SenderId))
+        @Helper.AvatarProfilLink(DB.Users.FindUser(item.ReceiverId))
+        <span class="command icon fa blue fa-times-circle" url="/Chat/DeleteAdminMessage/@item.Id" message="Supprimer le message..." title="Supprimer le message..."></span>
+        <div class="sent" title="@item.SendDate.ToString("yyyy'-'MM'-'dd HH':'mm")" id="sent_@item.Id" utc="-4">
+            <span class="token">@item.TextMessage</span>
+        </div>
+    </div>
+}

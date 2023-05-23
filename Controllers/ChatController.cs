@@ -123,11 +123,28 @@ namespace ChatManager.Controllers
             DB.Messages.Update(new Message(oldMessage.Id, oldMessage.SenderId, oldMessage.ReceiverId, message, oldMessage.SendDate));
             return null;
         }
+        #region AdminChat
         [OnlineUsers.AdminAccess]
         public ActionResult AdminChat()
         {
             return View();
         }
 
+        [OnlineUsers.AdminAccess(false)] // RefreshTimout = false otherwise periodical refresh with lead to never timed out session
+        public ActionResult GetAdminMessagesStatus(bool forceRefresh = false)
+        {
+            if (forceRefresh ||  DB.Messages.HasChanged)
+            {
+                return PartialView();
+            }
+            return null;
+        }
+
+        public ActionResult DeleteAdminMessage(int id)
+        {
+            DB.Messages.Delete(id);
+            return null;
+        }
+        #endregion
     }
 }

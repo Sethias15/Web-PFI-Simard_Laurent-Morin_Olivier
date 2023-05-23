@@ -368,6 +368,7 @@ namespace ChatManager.Controllers
         [OnlineUsers.AdminAccess]
         public JsonResult Delete(int userid)
         {
+            DB.Messages.DeleteMessagesByUser(userid);
             return Json(DB.Users.Delete(userid), JsonRequestBehavior.AllowGet);
         }
         [OnlineUsers.AdminAccess]
@@ -437,6 +438,63 @@ namespace ChatManager.Controllers
             }
             catch (Exception) { }
             return RedirectToAction("LoginsJournal");
+        }
+        #endregion
+
+        #region Admin profil
+        [OnlineUsers.AdminAccess]
+        public ActionResult UserProfile(int id)
+        {
+            User user = DB.Users.FindUser(id);
+            if (user.IsAdmin && user.Id != OnlineUsers.GetSessionUser().Id)
+            {
+                return RedirectToAction("UserList", "Accounts");
+            }
+            ViewBag.UserTypes = SelectListUtilities<UserType>.Convert(DB.UserTypes.ToList());
+            User userToEdit = user.Clone();
+            userToEdit.ConfirmEmail = userToEdit.Email;
+            userToEdit.ConfirmPassword = userToEdit.Password;
+            userToEdit.AcceptNotification = true;
+            if (userToEdit != null)
+            {
+                return View(userToEdit);
+            }
+            return null;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken()]
+        public ActionResult UserProfile(User user)
+        {
+            User currentUser = DB.Users.Get(user.Id);
+            user.Id = currentUser.Id;
+            user.Avatar = currentUser.Avatar;
+            user.GenderId = currentUser.GenderId;
+            user.CreationDate = currentUser.CreationDate;
+            string newEmail = "";
+            if (ModelState.IsValid)
+            {
+                if (user.Email != currentUser.Email)
+                {
+                    newEmail = user.Email;
+                    user.Email = user.ConfirmEmail = currentUser.Email;
+                }
+
+                if (DB.Users.Update(user))
+                {
+                    if (newEmail != "")
+                    {
+                        SendEmailChangedVerification(user, newEmail);
+                        return RedirectToAction("EmailChangedAlert");
+                    }
+                    else
+                        return RedirectToAction("UserList", "Accounts");
+                }
+                else
+                    return RedirectToAction("Report", "Errors", new { message = "Échec de modification de profil" });
+            }
+            ViewBag.UserTypes = SelectListUtilities<UserType>.Convert(DB.UserTypes.ToList());
+            return View(currentUser);
         }
         #endregion
     }
