@@ -12,18 +12,18 @@ namespace ChatManager.Models
             SenderId = senderId;
             ReceiverId = receiverId;
             TextMessage = message;
+            SendDate = DateTime.Now;
         }
         public Message()
         {
-            SenderId = -1;
-            ReceiverId = -1;
-            TextMessage = "";
+            SendDate = DateTime.Now;
         }
         #region Data Members
         public int Id { get; set; }
         public int SenderId { get; set; }
         public int ReceiverId { get; set; }
         public string TextMessage { get; set; }
+        public DateTime SendDate { get; set; }
         #endregion
     }
 }
