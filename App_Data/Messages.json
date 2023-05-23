@@ -1,0 +1,20 @@
+﻿[
+  {
+    "Id": 1,
+    "SenderId": 1,
+    "ReceiverId": 2,
+    "TextMessage": "Salut"
+  },
+  {
+    "Id": 1,
+    "SenderId": 1,
+    "ReceiverId": 3,
+    "TextMessage": "C'est toujours bon pour mardi prochain ?"
+  },
+  {
+    "Id": 1,
+    "SenderId": 2,
+    "ReceiverId": 1,
+    "TextMessage": "Salut moi c'est Luc!"
+  }
+]
