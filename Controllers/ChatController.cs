@@ -9,7 +9,8 @@ namespace ChatManager.Controllers
 {
     public class ChatController : Controller
     {
-        private int CurrentTarget {
+        private int CurrentTarget
+        {
             get
             {
                 if (Session["CurrentTarget"] == null)
@@ -42,11 +43,27 @@ namespace ChatManager.Controllers
             }
             return userToShow;
         }
-        //public ActionResult SetCurrentTarget(int userId)
-        //{
-        //}
+        private List<Message> GetConversation()
+        {
+            List<Message> allMessage = DB.Messages.ToList();
+            List<Message> conversation = new List<Message>();
+            User currentUser = OnlineUsers.GetSessionUser();
+            User targetFriend = DB.Users.Get(CurrentTarget);
 
-        // GET: Chat
+            if (targetFriend != null)
+            {
+                foreach (Message message in allMessage)
+                {
+                    if ((message.SenderId == currentUser.Id || message.SenderId == targetFriend.Id) && (message.ReceiverId == currentUser.Id || message.ReceiverId == targetFriend.Id))
+                    {
+                        conversation.Add(message);
+                    }
+                }
+            }
+
+            return conversation;
+        }
+
         [OnlineUsers.UserAccess]
         public ActionResult Index()
         {
@@ -65,8 +82,15 @@ namespace ChatManager.Controllers
             return null;
         }
         [OnlineUsers.UserAccess]
-        public ActionResult GetMessages()
+        public ActionResult GetMessages(bool forceRefresh = false)
         {
+            if (forceRefresh || OnlineUsers.HasChanged() || DB.Friendships.HasChanged)
+            {
+                ViewBag.TargetFriend = CurrentTarget;
+                ViewBag.CurrentUser = OnlineUsers.GetSessionUser();
+                ViewBag.CurrentConversation = GetConversation();
+                return PartialView();
+            }
             return null;
         }
         public ActionResult SetCurrentTarget(int userId = 0)

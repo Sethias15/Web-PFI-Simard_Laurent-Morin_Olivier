@@ -1,0 +1,75 @@
+﻿@using ChatManager.Models;
+
+@{
+    int targetFriendId = ViewBag.TargetFriend;
+    User currentUser = ViewBag.CurrentUser;
+}
+
+
+@if (targetFriendId != 0)
+{
+    User targetFriend = DB.Users.Get(targetFriendId);
+
+        <div class="messagesHeader">
+            <h4>Conversation avec </h4>
+            <div class="userItem">
+                <div class="UserMediumAvatar" style="background: url(@targetFriend.GetAvatarURL())"></div>
+                <div class="ellipsis">@targetFriend.GetFullName(false)</div>
+            </div>
+        </div>
+
+
+        @*<div class="messageTime">
+                23 mai 2023 - 10:44
+            </div>*@
+        foreach (Message message in ViewBag.CurrentConversation)
+        {
+            if (message.SenderId == targetFriend.Id)
+            {
+                <div class="receivedLayout">
+                    <div class="received" title="Dummy">
+                        <span class="token"> @Helper.ParseContent(@message.TextMessage)</span>
+                    </div>
+                </div>
+            }
+            else if (message.SenderId == currentUser.Id)
+            {
+                <div class="sentLayout">
+                    <div class="sent" title="Dummy" id="Dummy" utc="-4">
+
+                        <span class="token">@Helper.ParseContent(@message.TextMessage)</span>
+
+
+                    </div>
+                    @* Indicateur lu/non lue*@
+                </div>
+
+
+                @* misc.
+                        <div class="editMessage" id="edit_457" style="display: none;">
+
+                        <input id="457" value="Bonjour!" class="sent form-control">
+                        <span id="update_457" class="icon fa fa-check smallerIcon" title="Modifier ce message" data-placement="bottom">
+                        </span>
+
+                        <span id="delete_457" class="icon fa fa-times smallerIcon" title="Effacer ce message" data-placement="bottom">
+                        </span>
+
+                    </div>
+                    <div class="receivedLayout" id="typing" style="display: none;">
+                        <img src="/Content/UI-icons/typing1.gif" style="width:40px; border-radius:8px" class="received">
+                    </div>*@
+
+            }
+        }
+        <div style="height:40px;">&nbsp;</div>
+}
+else
+{
+    <div class="messagesPanel" id="messagesPanel" title="Cliquez sur un de vos messages pour l'éditer...">
+        <div class="messagesHeader">
+            <h4>Sélectionner un ami... </h4>
+        </div>
+    </div>
+}
+

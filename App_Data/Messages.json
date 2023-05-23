@@ -6,15 +6,39 @@
     "TextMessage": "Salut"
   },
   {
-    "Id": 1,
+    "Id": 2,
     "SenderId": 1,
     "ReceiverId": 3,
     "TextMessage": "C'est toujours bon pour mardi prochain ?"
   },
   {
-    "Id": 1,
+    "Id": 3,
     "SenderId": 2,
     "ReceiverId": 1,
     "TextMessage": "Salut moi c'est Luc!"
+  },
+  {
+    "Id": 4,
+    "SenderId": 9,
+    "ReceiverId": 2,
+    "TextMessage": "Salut"
+  },
+  {
+    "Id": 5,
+    "SenderId": 2,
+    "ReceiverId": 9,
+    "TextMessage": " Bonjour! moi ses Saliha!"
+  },
+  {
+    "Id": 6,
+    "SenderId": 9,
+    "ReceiverId": 2,
+    "TextMessage": "Ravi de te rencontrer!"
+  },
+  {
+    "Id": 7,
+    "SenderId": 2,
+    "ReceiverId": 9,
+    "TextMessage": "https://fruiteriepotager.com/wp-content/uploads/2020/07/74134-68-ORANGE-GROSSE.jpg Regarde cette belle orange!!!"
   }
 ]
