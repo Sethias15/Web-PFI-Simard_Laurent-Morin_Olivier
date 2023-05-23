@@ -2,13 +2,23 @@
 @using ChatManager.Models;
 <br />
 @{
+    int currentFriend = ViewBag.TargetFriend;
     ViewBag.Title = "GetFriendsList";
 }
-@foreach (var friend in ViewBag.FilteredFriends)
+@foreach (User friend in ViewBag.FilteredFriends)
 {
+    string classAttribute = "";
+    if (friend.Id == currentFriend)
+    {
+        classAttribute = "selectedTarget";
+    }
+    else
+    {
+        classAttribute = "unselectedTarget";
+    }
 
     //if est choisi, entourer l'utilisateur
-    <div class="unselectedTarget" userid="1">
+    <div class="@classAttribute" userid="@friend.Id">
 
     <div class="UserSmallAvatar" style="background: url(@friend.GetAvatarURL())" title=@friend.GetFullName(false)></div>
     </div>

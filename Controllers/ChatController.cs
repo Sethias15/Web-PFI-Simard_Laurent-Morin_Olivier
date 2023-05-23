@@ -9,7 +9,20 @@ namespace ChatManager.Controllers
 {
     public class ChatController : Controller
     {
-
+        private int CurrentTarget {
+            get
+            {
+                if (Session["CurrentTarget"] == null)
+                {
+                    Session["CurrentTarget"] = 0;
+                }
+                return (int)Session["CurrentTarget"];
+            }
+            set
+            {
+                Session["CurrentTarget"] = value;
+            }
+        }
         private List<User> FilterFriends()
         {
             List<User> allUsers = new List<User>(DB.Users.SortedUsers());
@@ -45,11 +58,27 @@ namespace ChatManager.Controllers
         {
             if (forceRefresh || OnlineUsers.HasChanged() || DB.Friendships.HasChanged)
             {
+                ViewBag.TargetFriend = CurrentTarget;
                 ViewBag.FilteredFriends = FilterFriends();
                 return PartialView();
             }
             return null;
         }
+        [OnlineUsers.UserAccess]
+        public ActionResult GetMessages()
+        {
+            return null;
+        }
+        public ActionResult SetCurrentTarget(int userId = 0)
+        {
+            CurrentTarget = userId;
+            return null;
+        }
 
+        [OnlineUsers.UserAccess]
+        public ActionResult IsTargetTyping()
+        {
+            return null;
+        }
     }
 }
