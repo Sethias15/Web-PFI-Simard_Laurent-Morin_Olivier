@@ -14,6 +14,14 @@ namespace ChatManager.Models
             TextMessage = message;
             SendDate = DateTime.Now;
         }
+        public Message(int id, int senderId, int receiverId, string message, DateTime dateTime)
+        {
+            Id = id;
+            SenderId = senderId;
+            ReceiverId = receiverId;
+            TextMessage = message;
+            SendDate = dateTime;
+        }
         public Message()
         {
             SendDate = DateTime.Now;

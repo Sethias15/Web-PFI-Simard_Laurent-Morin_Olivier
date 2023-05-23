@@ -274,7 +274,6 @@
     <Content Include="Views\Accounts\VerifyError.cshtml" />
     <Content Include="Views\Friendships\Index.cshtml" />
     <Content Include="Views\Friendships\GetFriendShipsStatus.cshtml" />
-    <Content Include="Views\Friendships\SetFilterNotFriend.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Chat\GetFriendsList.cshtml" />
     <Content Include="Views\Chat\AdminChat.cshtml" />

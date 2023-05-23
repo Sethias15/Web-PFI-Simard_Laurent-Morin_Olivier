@@ -104,6 +104,25 @@ namespace ChatManager.Controllers
         {
             return null;
         }
+        [OnlineUsers.UserAccess]
+        public ActionResult Send(string message)
+        {
+            DB.Messages.Add(new Message(OnlineUsers.GetSessionUser().Id, CurrentTarget, message));
+            return null;
+        }
+        [OnlineUsers.UserAccess]
+        public ActionResult Delete(int id)
+        {
+            DB.Messages.Delete(id);
+            return null;
+        }
+        [OnlineUsers.UserAccess]
+        public ActionResult Update(int id, string message)
+        {
+            Message oldMessage = DB.Messages.Get(id);
+            DB.Messages.Update(new Message(oldMessage.Id, oldMessage.SenderId, oldMessage.ReceiverId, message, oldMessage.SendDate));
+            return null;
+        }
         [OnlineUsers.AdminAccess]
         public ActionResult AdminChat()
         {
