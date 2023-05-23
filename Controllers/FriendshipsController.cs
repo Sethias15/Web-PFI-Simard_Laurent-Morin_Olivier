@@ -10,6 +10,21 @@ namespace ChatManager.Controllers
 {
     public class FriendshipsController : Controller
     {
+        // GET: Friendships
+        [OnlineUsers.UserAccess]
+        public ActionResult Index()
+        {
+            ViewBag.FilterNotFriend = FilterNotFriend;
+            ViewBag.FilterRequest = FilterRequest;
+            ViewBag.FilterPending = FilterPending;
+            ViewBag.FilterFriend = FilterFriend;
+            ViewBag.FilterRefused = FilterRefused;
+            ViewBag.FilterBlocked = FilterBlocked;
+            ViewBag.LoggedUsersId = new List<int>(OnlineUsers.ConnectedUsersId);
+            return View();
+        }
+
+        #region Gestion amitiés
         private string SearchText
         {
             get
@@ -115,20 +130,8 @@ namespace ChatManager.Controllers
                 Session["FilterBlocked"] = value;
             }
         }
-
-        // GET: Friendships
-        [OnlineUsers.UserAccess]
-        public ActionResult Index()
-        {
-            ViewBag.FilterNotFriend = FilterNotFriend;
-            ViewBag.FilterRequest = FilterRequest;
-            ViewBag.FilterPending = FilterPending;
-            ViewBag.FilterFriend = FilterFriend;
-            ViewBag.FilterRefused = FilterRefused;
-            ViewBag.FilterBlocked = FilterBlocked;
-            ViewBag.LoggedUsersId = new List<int>(OnlineUsers.ConnectedUsersId);
-            return View();
-        }
+        
+        
         public ActionResult Search(string text)
         {
             SearchText = text;
@@ -221,9 +224,6 @@ namespace ChatManager.Controllers
             }
             return userToShow;
         }
-
-
-
         [OnlineUsers.UserAccess(false)] // RefreshTimout = false otherwise periodical refresh with lead to never timed out session
         public ActionResult GetFriendShipsStatus(bool forceRefresh = false)
         {
@@ -284,5 +284,7 @@ namespace ChatManager.Controllers
             //différente fonction pour conservation messages ?
             return null;
         }
+
+        #endregion
     }
 }

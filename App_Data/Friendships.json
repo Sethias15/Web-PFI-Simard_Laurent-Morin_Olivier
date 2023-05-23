@@ -1,44 +1,44 @@
 [
   {
-    "id": 1,
-    "userId": 10,
+    "Id": 1,
+    "UserId": 10,
     "TargetUserId": 1,
     "Accepted": false,
     "Declined": false
   },
   {
-    "id": 2,
-    "userId": 10,
+    "Id": 2,
+    "UserId": 10,
     "TargetUserId": 2,
     "Accepted": true,
     "Declined": false
   },
   {
-    "id": 3,
-    "userId": 10,
+    "Id": 3,
+    "UserId": 10,
     "TargetUserId": 3,
     "Accepted": false,
     "Declined": true
   },
   {
-    "id": 4,
-    "userId": 4,
+    "Id": 4,
+    "UserId": 4,
     "TargetUserId": 10,
     "Accepted": true,
     "Declined": false
   },
   {
-    "id": 5,
-    "userId": 5,
+    "Id": 5,
+    "UserId": 5,
     "TargetUserId": 10,
     "Accepted": false,
     "Declined": true
   },
   {
-    "id": 6,
-    "userId": 6,
+    "Id": 6,
+    "UserId": 6,
     "TargetUserId": 10,
-    "Accepted": false,
+    "Accepted": true,
     "Declined": false
   },
   {
