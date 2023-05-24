@@ -49,7 +49,6 @@ namespace ChatManager.Controllers
             List<Message> conversation = new List<Message>();
             User currentUser = OnlineUsers.GetSessionUser();
             User targetFriend = DB.Users.Get(CurrentTarget);
-
             if (targetFriend != null)
             {
                 foreach (Message message in allMessage)
@@ -84,10 +83,19 @@ namespace ChatManager.Controllers
         [OnlineUsers.UserAccess]
         public ActionResult GetMessages(bool forceRefresh = false)
         {
-            if (forceRefresh || OnlineUsers.HasChanged() || DB.Friendships.HasChanged)
+            if (forceRefresh || OnlineUsers.HasChanged() || DB.Messages.HasChanged || DB.Friendships.HasChanged)
             {
+                if(CurrentTarget != 0)
+                {
+                    ViewBag.CurrentUser = OnlineUsers.GetSessionUser();
+                    Friendship fs = DB.Friendships.GetByTargetId(CurrentTarget, ViewBag.CurrentUser.Id);
+                    if (fs == null || !fs.Accepted)
+                    {
+                        CurrentTarget = 0;
+                    }
+                }
+
                 ViewBag.TargetFriend = CurrentTarget;
-                ViewBag.CurrentUser = OnlineUsers.GetSessionUser();
                 ViewBag.CurrentConversation = GetConversation();
                 return PartialView();
             }
@@ -107,7 +115,12 @@ namespace ChatManager.Controllers
         [OnlineUsers.UserAccess]
         public ActionResult Send(string message)
         {
-            DB.Messages.Add(new Message(OnlineUsers.GetSessionUser().Id, CurrentTarget, message));
+            if (CurrentTarget > 0)
+            {
+                User currentUser = OnlineUsers.GetSessionUser();
+                DB.Messages.Add(new Message(currentUser.Id, CurrentTarget, message));
+                OnlineUsers.AddNotification(CurrentTarget, $"Vous avez reçu un message de {currentUser.GetFullName()}: {message}");
+            }
             return null;
         }
         [OnlineUsers.UserAccess]
@@ -133,7 +146,7 @@ namespace ChatManager.Controllers
         [OnlineUsers.AdminAccess(false)] // RefreshTimout = false otherwise periodical refresh with lead to never timed out session
         public ActionResult GetAdminMessagesStatus(bool forceRefresh = false)
         {
-            if (forceRefresh ||  DB.Messages.HasChanged)
+            if (forceRefresh || DB.Messages.HasChanged)
             {
                 return PartialView();
             }
