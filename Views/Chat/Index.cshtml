@@ -7,7 +7,7 @@
 <div style="display:grid; grid-template-columns: 65px auto; align-items:center">
     @if (ChatManager.Models.OnlineUsers.GetSessionUser().IsAdmin)
     {
-        @Helper.ImageLink("Chat", "AdminChat", "/favicon.png", "AdminChatBtn", "Salle de clavardage...");
+        @Helper.ImageLink("Chat", "AdminChat", "/favicon.png", "AdminChatBtn", "Modération des messages...");
     }
     else
     {

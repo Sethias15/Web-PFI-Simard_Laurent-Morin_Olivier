@@ -1,4 +1,4 @@
-@model ChatManager.Models.Friendship
+﻿@model ChatManager.Models.Friendship
 @using ChatManager.Models;
 <br />
 @foreach (var item in ViewBag.FilteredUser)
@@ -16,7 +16,7 @@
         @if (item.Blocked)
         {
             <img src="~/Content/UI-icons/Masked.png" class="small_icon">
-            <span class="icon fa red fa-ban" title="Requête d'amitié avec @item.GetFullName(false) en attente"></span>
+            <span class="icon fa red fa-ban" title="Le compte de @item.GetFullName(false) est bloqué"></span>
         }
         else
         {
@@ -32,7 +32,7 @@
             {
                 if (friendship.Accepted && !friendship.Declined)
                 {
-                    <span class="icon fa green fa-check-circle" title="Vous ête ami avec @item.GetFullName(false)"></span>
+                    <span class="icon fa green fa-check-circle" title="Vous êtes ami avec @item.GetFullName(false)"></span>
                     <span class="command icon fa red fa-times" url="/Friendships/RemoveFriendship/@friendship.Id" message="Retirer l'amitié avec @item.GetFullName(false)" title="Retirer l'amitié avec @item.GetFullName(false)é"></span>
                 }
                 else if (!friendship.Accepted && !friendship.Declined && item.Id == friendship.UserId)

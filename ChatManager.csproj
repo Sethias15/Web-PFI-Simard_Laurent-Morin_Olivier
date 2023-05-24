@@ -158,7 +158,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\iso-3166.txt" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -209,14 +208,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Code\Helper.cshtml" />
-    <Content Include="App_Data\Friendships.json" />
-    <Content Include="App_Data\Genders.json" />
-    <Content Include="App_Data\Logins.json" />
-    <Content Include="App_Data\ResetPasswordCommands.json" />
-    <Content Include="App_Data\UnverifiedEmails.json" />
-    <Content Include="App_Data\Users.json" />
-    <Content Include="App_Data\UserTypes.json" />
-    <Content Include="App_Data\Messages.json" />
     <None Include="Properties\PublishProfiles\ChatManager2023 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ChatManager20230501161205 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ChatManager20230516133157 - Web Deploy.pubxml" />
@@ -274,13 +265,13 @@
     <Content Include="Views\Accounts\VerifyDone.cshtml" />
     <Content Include="Views\Accounts\VerifyError.cshtml" />
     <Content Include="Views\Friendships\Index.cshtml" />
-    <Content Include="Views\Friendships\GetFriendShipsStatus.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Chat\GetFriendsList.cshtml" />
     <Content Include="Views\Chat\AdminChat.cshtml" />
     <Content Include="Views\Chat\GetMessages.cshtml" />
     <Content Include="Views\Chat\GetAdminMessagesStatus.cshtml" />
     <Content Include="Views\Accounts\UserProfile.cshtml" />
+    <Content Include="Views\Friendships\GetFriendShipsStatus.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
