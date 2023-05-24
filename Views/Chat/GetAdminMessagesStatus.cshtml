@@ -7,7 +7,7 @@
         @Helper.AvatarProfilLink(DB.Users.FindUser(item.ReceiverId))
         <span class="command icon fa blue fa-times-circle" url="/Chat/DeleteAdminMessage/@item.Id" message="Supprimer le message..." title="Supprimer le message..."></span>
         <div class="sent" title="@item.SendDate.ToString("yyyy'-'MM'-'dd HH':'mm")" id="sent_@item.Id" utc="-4">
-            <span class="token">@item.TextMessage</span>
+            <span class="token">@Helper.ParseContent(@item.TextMessage)</span>
         </div>
     </div>
 }
