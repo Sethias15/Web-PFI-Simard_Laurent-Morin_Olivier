@@ -45,24 +45,20 @@
                 </div>
             </div>
 
-                    <div class="editMessage" id="edit_@message.Id" style="display: none;">
+            <div class="editMessage" id="edit_@message.Id" style="display: none;">
 
-                    <input id="@message.Id" value="@message.TextMessage" class="sent form-control">
-                    <span id="update_@message.Id" class="icon fa fa-check smallerIcon" title="Modifier ce message" data-placement="bottom">
-                    </span>
+                <input id="@message.Id" value="@message.TextMessage" class="sent form-control">
+                <span id="update_@message.Id" class="icon fa fa-check smallerIcon" title="Modifier ce message" data-placement="bottom">
+                </span>
 
-                    <span id="delete_@message.Id" class="icon fa fa-times smallerIcon" title="Effacer ce message" data-placement="bottom">
-                    </span>
+                <span id="delete_@message.Id" class="icon fa fa-times smallerIcon" title="Effacer ce message" data-placement="bottom">
+                </span>
 
-                </div>
-                <div class="receivedLayout" id="typing" style="display: none;">
-                    <img src="/Content/UI-icons/typing1.gif" style="width:40px; border-radius:8px" class="received">
-                </div>
-
+            </div>
         }
 
-            lastMessageSent = message;
-       
+        lastMessageSent = message;
+
     }
     <div style="height:40px;">&nbsp;</div>
 }

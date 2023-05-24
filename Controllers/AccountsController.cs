@@ -369,6 +369,7 @@ namespace ChatManager.Controllers
         public JsonResult Delete(int userid)
         {
             DB.Messages.DeleteMessagesByUser(userid);
+            DB.Friendships.DeleteByUser(userid);
             return Json(DB.Users.Delete(userid), JsonRequestBehavior.AllowGet);
         }
         [OnlineUsers.AdminAccess]

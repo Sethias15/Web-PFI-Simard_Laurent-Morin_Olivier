@@ -89,7 +89,8 @@ namespace ChatManager.Controllers
                 {
                     ViewBag.CurrentUser = OnlineUsers.GetSessionUser();
                     Friendship fs = DB.Friendships.GetByTargetId(CurrentTarget, ViewBag.CurrentUser.Id);
-                    if (fs == null || !fs.Accepted)
+                    User targetUser = DB.Users.FindUser(CurrentTarget);
+                    if (fs == null || !fs.Accepted || targetUser == null || targetUser.Blocked)
                     {
                         CurrentTarget = 0;
                     }

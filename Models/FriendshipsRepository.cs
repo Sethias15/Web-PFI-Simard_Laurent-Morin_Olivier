@@ -28,5 +28,13 @@ namespace ChatManager.Models
 
             return ToList().Where(f => f.UserId == userId || f.TargetUserId == userId).ToList();
         }
+        
+        public void DeleteByUser(int userId)
+        {
+            foreach(Friendship fs in GetByUserId(userId))
+            {
+                Delete(fs.Id);
+            }
+        }
     }
 }
