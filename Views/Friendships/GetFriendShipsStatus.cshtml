@@ -33,7 +33,7 @@
                 if (friendship.Accepted && !friendship.Declined)
                 {
                     <span class="icon fa green fa-check-circle" title="Vous êtes ami avec @item.GetFullName(false)"></span>
-                    <span class="command icon fa red fa-times" url="/Friendships/RemoveFriendship/@friendship.Id" message="Retirer l'amitié avec @item.GetFullName(false)" title="Retirer l'amitié avec @item.GetFullName(false)é"></span>
+                    <span class="command icon fa red fa-times" url="/Friendships/RemoveFriendship/@friendship.Id" message="Retirer l'amitié avec @item.GetFullName(false)" title="Retirer l'amitié avec @item.GetFullName(false)"></span>
                 }
                 else if (!friendship.Accepted && !friendship.Declined && item.Id == friendship.UserId)
                 {
